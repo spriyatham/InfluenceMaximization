@@ -1,4 +1,7 @@
 package com.cs255.im.tdg.graph;
+
+import java.io.Serializable;
+
 /**
  * @author Sriarm Priyatham Siram
  *
@@ -6,7 +9,7 @@ package com.cs255.im.tdg.graph;
 /**
  * Represnets an elment of the Outward Adjacency list.
  * */
-public class AdjNode {
+public class AdjNode implements Serializable{
 	long nodeID;
 	float weight;
 	

@@ -1,5 +1,6 @@
 package com.cs255.im.tdg.graph;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ import java.util.List;
  * 
  * */
 
-public class Node {
+public class Node implements Serializable{
 	long nodeID;
 	int outDegree;
 	List<AdjNode> outAdjList;
