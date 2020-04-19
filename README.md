@@ -1,7 +1,7 @@
 # InfluenceMaximization
  SJSU : CS-255 Project on "Deterministice Threshold based Influence Maximization Algorithm"
  
- /*Team Members:*/
+ # Team Members:
  Sriarm Priyatham Siram
  Charulata Lodha
  
