@@ -3,11 +3,11 @@ package com.cs255.im.tdg.graph;
 import java.io.Serializable;
 
 /**
- * @author Sriarm Priyatham Siram
+ * @author Sriarm Priyatham Siram 
  *
  */
 /**
- * Represnets an elment of the Outward Adjacency list.
+ * Represents an element of the Outward Adjacency list.
  * */
 public class AdjNode implements Serializable{
 	long nodeID;
@@ -32,5 +32,15 @@ public class AdjNode implements Serializable{
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
+
+	@Override
+	public String toString() {
+		return ""+ this.nodeID+"";
+	}
+	
+	public String toString2() {
+		return "AdjNode [nodeID=" + nodeID + ", weight=" + weight + "]";
+	}
+
 	
 }

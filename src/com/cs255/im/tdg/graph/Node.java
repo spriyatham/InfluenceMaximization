@@ -1,6 +1,7 @@
 package com.cs255.im.tdg.graph;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,18 +25,43 @@ import java.util.List;
 
 public class Node implements Serializable{
 	long nodeID;
+	
 	int outDegree;
 	List<AdjNode> outAdjList;
+	
 	int inDegree;
 	List<Long> inAdjList;
+	
 	/**
 	 * @note: These will be computed during the algorithm execution.
 	 * */
+	
 	float threshold;
 	float influence;
 	
+	
+	
+	/**
+	 * @param nodeID
+	 * @param outDegree
+	 * @param outAdjList
+	 * @param inDegree
+	 * @param inAdjList
+	 * @param threshold
+	 * @param influence
+	 */
+	public Node() {
+		super();
+		this.outAdjList = new ArrayList<AdjNode>();
+		this.inAdjList = new ArrayList<Long>();
+		
+	}
+	
 	public Node(long nodeID) {
 		this.nodeID = nodeID;
+		this.outAdjList = new ArrayList<AdjNode>();
+		this.inAdjList = new ArrayList<Long>();
+		
 	}
 	public long getNodeID() {
 		return nodeID;
@@ -50,7 +76,7 @@ public class Node implements Serializable{
 		this.outDegree = outDegree;
 	}
 	public List<AdjNode> getOutAdjList() {
-		return outAdjList;
+		return this.outAdjList;
 	}
 	public void setOutAdjList(List<AdjNode> outAdjList) {
 		this.outAdjList = outAdjList;
@@ -62,7 +88,7 @@ public class Node implements Serializable{
 		this.inDegree = inDegree;
 	}
 	public List<Long> getInAdjList() {
-		return inAdjList;
+		return this.inAdjList;
 	}
 	public void setInAdjList(List<Long> inAdjList) {
 		this.inAdjList = inAdjList;
@@ -79,5 +105,14 @@ public class Node implements Serializable{
 	public void setInfluence(float influence) {
 		this.influence = influence;
 	}
+
+	@Override
+	public String toString() {
+		return  ":"+ String.format("%-10s [outDegree: %-2s inDegree:%-2s threshold: %s influence: %s]",nodeID,outDegree, inDegree,threshold,influence )
+				+ " outAdjList=" + outAdjList.toString() 
+				+ "   inAdjList=" + inAdjList.toString(); 
+				
+	}
+	
 		
 }
