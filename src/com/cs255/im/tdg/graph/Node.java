@@ -2,7 +2,9 @@ package com.cs255.im.tdg.graph;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Sriarm Priyatham Siram
@@ -27,7 +29,7 @@ public class Node implements Serializable{
 	long nodeID;
 	
 	int outDegree;
-	List<AdjNode> outAdjList;
+	Map<Long,Float> outAdjMap;
 	
 	int inDegree;
 	List<Long> inAdjList;
@@ -52,14 +54,14 @@ public class Node implements Serializable{
 	 */
 	public Node() {
 		super();
-		this.outAdjList = new ArrayList<AdjNode>();
+		this.outAdjMap = new HashMap<Long, Float>();
 		this.inAdjList = new ArrayList<Long>();
 		
 	}
 	
 	public Node(long nodeID) {
 		this.nodeID = nodeID;
-		this.outAdjList = new ArrayList<AdjNode>();
+		this.outAdjMap = new HashMap<Long, Float>();
 		this.inAdjList = new ArrayList<Long>();
 		
 	}
@@ -75,11 +77,11 @@ public class Node implements Serializable{
 	public void setOutDegree(int outDegree) {
 		this.outDegree = outDegree;
 	}
-	public List<AdjNode> getOutAdjList() {
-		return this.outAdjList;
+	public Map<Long, Float> getOutAdjMap() {
+		return this.outAdjMap;
 	}
-	public void setOutAdjList(List<AdjNode> outAdjList) {
-		this.outAdjList = outAdjList;
+	public void setOutAdjList(Map<Long, Float> outAdjMap) {
+		this.outAdjMap = outAdjMap;
 	}
 	public int getInDegree() {
 		return inDegree;
@@ -109,7 +111,7 @@ public class Node implements Serializable{
 	@Override
 	public String toString() {
 		return  ":"+ String.format("%-10s [outDegree: %-2s inDegree:%-2s threshold: %s influence: %s]",nodeID,outDegree, inDegree,threshold,influence )
-				+ " outAdjList=" + outAdjList.toString() 
+				+ " outAdjList=" + outAdjMap.toString() 
 				+ "   inAdjList=" + inAdjList.toString(); 
 				
 	}

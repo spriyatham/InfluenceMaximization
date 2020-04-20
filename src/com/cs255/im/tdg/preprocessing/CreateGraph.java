@@ -33,11 +33,11 @@ public class CreateGraph {
 					directedGraph.increseNumOfEdges();
 //					System.out.println(" Edge:" + data);
 					// create a node vertex
-					Node vertex1 = createVertexNode(edge[0]);
-					Node vertex2 = createVertexNode(edge[1]);
+					Node vertex1 = createNode(edge[0]);
+					Node vertex2 = createNode(edge[1]);
 
 					// record the outgoing edge
-					vertex1.getOutAdjList().add(new AdjNode(vertex2.getNodeID(), 0));
+					vertex1.getOutAdjMap().put((Long)vertex2.getNodeID(), (Float)0.0f);
 					
 					//	record the incoming edge
 					vertex2.getInAdjList().add(vertex1.getNodeID());
@@ -45,7 +45,7 @@ public class CreateGraph {
 
 				} else if (edge.length == 1) {
 					System.out.println("Single Node :" + data);
-					createVertexNode(edge[0]);
+					createNode(edge[0]);
 				} else {
 					System.out.println("Empty Node :" + data);
 				}
@@ -69,7 +69,7 @@ public class CreateGraph {
 
 	}
 
-	public static Node createVertexNode(String v) {
+	public static Node createNode(String v) {
 		
 		// add new vertex in Graph if not already added before
 		return directedGraph.addNode(new Node(Long.parseLong(v)));

@@ -78,7 +78,7 @@ public class Graph {
 		for (Node node : this.nodes.values())
 		{
 		   node.setInDegree(node.inAdjList.size());
-		   node.setOutDegree(node.outAdjList.size());
+		   node.setOutDegree(node.outAdjMap.size());
 		}
 		
 	}
