@@ -29,6 +29,7 @@ public class Node implements Serializable{
 	long nodeID;
 	
 	int outDegree;
+	//NodeID, Weight
 	Map<Long,Float> outAdjMap;
 	
 	int inDegree;

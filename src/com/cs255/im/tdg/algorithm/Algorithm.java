@@ -15,6 +15,9 @@ public class Algorithm {
 	Graph graph;
 	/**
 	 * TODO Add more parameters..
+	 * 1. paramaters of COmpute Influed d1, d2, d3, Graph
+	 * 2. All these should instance members of Algorithm..
+	 * 3. Computer Threshold..constant for all nodes.. 
 	 * */
 	void computeInfluence(Node v)
 	{
