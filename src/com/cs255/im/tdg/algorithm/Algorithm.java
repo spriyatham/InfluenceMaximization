@@ -120,8 +120,8 @@ public class Algorithm {
 						Q.add(w);
 					L.add(w);
 				} else {
-					Infv += adjw.getWeight() / w.getThreshold(); // Temporarily update θw
-					w.setThreshold(w.getThreshold() - adjw.getWeight()); // θw = θw - p(u,w)
+					Infv += outwardsNode.getValue() / w.getThreshold(); // Temporarily update θw
+					w.setThreshold(w.getThreshold() - outwardsNode.getValue()); // θw = θw - p(u,w)
 				}
 			}
 			l++; // Check and update l
