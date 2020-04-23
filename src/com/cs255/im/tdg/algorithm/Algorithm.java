@@ -108,37 +108,41 @@ public class Algorithm {
 		HashMap<Long,Float> tempThresholds = new HashMap<Long,Float>();
 
 		while (!Q.isEmpty()) {
-			Node u = Q.poll();
-
-			for (Map.Entry<Long, Float> outwardNode : u.getOutAdjMap().entrySet())
-			{
-				float w_weight=outwardNode.getValue();
-				long  w_id=outwardNode.getKey();
-				
-				if (R.contains(w_id) || L.contains(w_id) ) 
-					continue;
-				
-				Node w_node = graph.getNodes().get(w_id);
-
-				if(!tempThresholds.containsKey(w_id))
-					tempThresholds.put(w_id,w_node.getThreshold());
-								
-				Float w_threshold= tempThresholds.get(w_id);
-				
-				if (w_weight > w_threshold) // weight ≥ θw
+			
+			int childs=Q.size();
+			
+			for(int i=0;i<childs;i++)
+			{  Node u = Q.poll();
+				for (Map.Entry<Long, Float> outwardNode : u.getOutAdjMap().entrySet())
 				{
-					Infv = Infv + 1;
-					if (l <= d1)
-						Q.add(w_node);
-					L.add(w_id);
+					float w_weight=outwardNode.getValue();
+					long  w_id=outwardNode.getKey();
+					
+					if (R.contains(w_id) || L.contains(w_id) ) 
+						continue;
+					
+					Node w_node = graph.getNodes().get(w_id);
+	
+					if(!tempThresholds.containsKey(w_id))
+						tempThresholds.put(w_id,w_node.getThreshold());
+									
+					Float w_threshold= tempThresholds.get(w_id);
+					
+					if (w_weight > w_threshold) // weight ≥ θw
+					{
+						Infv = Infv + 1;
+						if (l <= d1)
+							Q.add(w_node);
+						L.add(w_id);
+					}
+					else
+					{
+						Infv += w_weight/w_threshold;
+						w_threshold -=w_weight;
+						tempThresholds.replace(w_id, w_threshold);
+					}
 				}
-				else
-				{
-					Infv += w_weight/w_threshold;
-					w_threshold -=w_weight;
-					tempThresholds.replace(w_id, w_threshold);
-				}
-			}
+		   }
 			//TODO: level code
 			if (l + 1 <= d1)	
 			     l++; // Check and update l
