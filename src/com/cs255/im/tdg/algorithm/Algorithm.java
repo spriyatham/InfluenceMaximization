@@ -78,7 +78,7 @@ public class Algorithm {
 		// Compute initial influence for each node.
 		Map<Long, Node> nodeMap = this.graph.getNodes();
 		for (Node node : nodeMap.values())
-			computeInfluence(node, R); // ComputeInfluence(v,R,vθ,W,d1,G,Inf)
+			computeInfluence(node, R); 
 
 		for (int i = 1; i <= nmax; i++) {
 			// select a node with max influence
@@ -90,7 +90,7 @@ public class Algorithm {
 		}
 	}
 
-//	ComputeInfluence(w,R,wθ,W,d1,G,Inf)
+
 	void computeInfluence(Node v, Set<Long> R) {
 
 		Queue<Node> Q = new LinkedList<Node>();
@@ -139,12 +139,16 @@ public class Algorithm {
 					tempThresholds.replace(w_id, w_threshold);
 				}
 			}
+			
 			if (l + 1 <= d1)	
 			     l++; // Check and update l
 			else
-				l++;
+				break;
 		}
 
+		//update influence of V
+		v.setThreshold(Infv);
+		
 		// Restore back θ values from θtemp .
 		//not required as using tempThresholds. So, original threshold are intact;
 	}
