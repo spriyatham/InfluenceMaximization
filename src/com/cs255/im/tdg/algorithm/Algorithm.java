@@ -82,7 +82,7 @@ public class Algorithm {
 
 		for (int i = 1; i <= nmax; i++) {
 			// select a node with max influence
-			long s = 0;// Select s = argmax v ∈ V\R {Infv}
+			long s = 0;// Select s = argmax v ∈ V\R {Infv}  //TODO:maxheap
 			S.add(s);
 			R.add(s);
 			// See Algorithm 5.
@@ -139,7 +139,7 @@ public class Algorithm {
 					tempThresholds.replace(w_id, w_threshold);
 				}
 			}
-			
+			//TODO: level code
 			if (l + 1 <= d1)	
 			     l++; // Check and update l
 			else
@@ -147,7 +147,7 @@ public class Algorithm {
 		}
 
 		//update influence of V
-		v.setThreshold(Infv);
+		v.setInfluence(Infv);
 		
 		// Restore back θ values from θtemp .
 		//not required as using tempThresholds. So, original threshold are intact;
@@ -208,7 +208,12 @@ public class Algorithm {
 		Graph directedGraph = Util.loadGraph("twittergraph.ser");
 
 		Algorithm TDG = new Algorithm(directedGraph);
+		
+		System.out.print("Hello: Algo");
+		
+		int nmax=6; //number of seed nodes.
 
+		TDG.InfluenceMaximization(nmax);
 		// printGraph
 		directedGraph.printGraph();
 
