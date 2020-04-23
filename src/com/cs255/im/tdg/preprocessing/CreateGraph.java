@@ -2,9 +2,9 @@ package com.cs255.im.tdg.preprocessing;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
-import com.cs255.im.tdg.graph.AdjNode;
 import com.cs255.im.tdg.graph.Graph;
 import com.cs255.im.tdg.graph.Node;
 
@@ -17,7 +17,7 @@ public class CreateGraph {
 	static Graph directedGraph;
 	static String file = "/Users/charulatalodha/MyFolder/Spring2020/DAA/Project-InfluenceMax/twitterdata/f1/12831.edges";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// create an instance of Graph
 		directedGraph = new Graph();
 
@@ -60,6 +60,9 @@ public class CreateGraph {
 			directedGraph.setInOutDegrees();
 			//printGraph
 			directedGraph.printGraph();
+			//save graph in a file
+			Util.saveGraph(directedGraph, "twittergraph.ser");
+		
 			
 			
 		} catch (FileNotFoundException e) {

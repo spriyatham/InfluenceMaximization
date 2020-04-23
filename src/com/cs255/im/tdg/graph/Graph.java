@@ -1,13 +1,10 @@
 package com.cs255.im.tdg.graph;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
-public class Graph {
+public class Graph implements Serializable{
 	
 	//Graph has a map of nodes -> each node has out & in adjacency list
 	private Map<Long, Node> nodes;
@@ -84,41 +81,5 @@ public class Graph {
 	}
 	
 	
-	public String createFile()
-	{
-		   
-		    try {
-		      File myObj = new File("Graph.txt");
-		      if (myObj.createNewFile()) {
-		        System.out.println("File created: " + myObj.getName());
-		        
-		      } else {
-		        System.out.println("File already exists.");
-		      }
-		      
-		      return myObj.getPath();
-		      
-		    } catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
-			return "Graph.txt";
-		    
-		   
-	}
-	
-	public void writeToFile() {
-		  
-		    try {
-		    	
-		      FileWriter myWriter = new FileWriter(this.createFile());
-		      myWriter.write("add code here, call : printGraph()");
-		      myWriter.close();
-		      System.out.println("Successfully wrote to the file.");
-		    } catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
-		  }
 	
 }
