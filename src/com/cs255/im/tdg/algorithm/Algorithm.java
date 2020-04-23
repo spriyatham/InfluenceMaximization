@@ -20,7 +20,7 @@ import com.cs255.im.tdg.preprocessing.Util;
 public class Algorithm {
 	Graph graph;
 	float d1, d2, d3;
-	float threshold = 0.5f;
+	float threshold;
 
 	/**
 	 * TODO Add more parameters.. 1. paramaters of COmpute Influed d1, d2, d3, Graph
@@ -36,6 +36,7 @@ public class Algorithm {
 		this.d1 = 5;
 		this.d2 = 20;
 		this.d3 = 3;
+		this.threshold = 0.5f;
 
 		Map<Long, Node> nodeMap = this.graph.getNodes();
 		for (Node node : nodeMap.values()) { // set threshold
