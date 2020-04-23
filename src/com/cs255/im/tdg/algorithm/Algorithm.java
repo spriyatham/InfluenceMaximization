@@ -128,7 +128,7 @@ public class Algorithm {
 									
 					Float w_threshold= tempThresholds.get(w_id);
 					
-					if (w_weight > w_threshold) // weight ≥ θw
+					if (w_weight >= w_threshold) // weight ≥ θw
 					{
 						Infv = Infv + 1;
 						if (l <= d1)
