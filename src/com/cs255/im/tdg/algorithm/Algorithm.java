@@ -38,16 +38,7 @@ public class Algorithm {
 		this.d3 = 3;
 		this.threshold = 0.5f;
 
-		Map<Long, Node> nodeMap = this.graph.getNodes();
-		for (Node node : nodeMap.values()) { // set threshold
-			node.setThreshold(threshold);
-
-			// calculate weight for all edges : outgoingEdge
-			for (Map.Entry<Long, Float> outwardsNode : node.getOutAdjMap().entrySet()) {
-				outwardsNode.setValue((1.00f / nodeMap.get(outwardsNode.getKey()).getInDegree()));
-
-			}
-		}
+		weightThresholdInit();
 
 	}
 
@@ -64,6 +55,19 @@ public class Algorithm {
 		this.d2 = d2;
 		this.d3 = d3;
 		this.threshold = threshold;
+		weightThresholdInit();
+	}
+
+	void weightThresholdInit() {
+		Map<Long, Node> nodeMap = this.graph.getNodes();
+		for (Node node : nodeMap.values()) { // set threshold
+			node.setThreshold(threshold);
+
+			// calculate weight for all edges : outgoingEdge
+			for (Map.Entry<Long, Float> outwardsNode : node.getOutAdjMap().entrySet()) {
+				outwardsNode.setValue((1.00f / nodeMap.get(outwardsNode.getKey()).getInDegree()));
+			}
+		}
 	}
 
 	void InfluenceMaximization(int nmax) {
@@ -173,6 +177,11 @@ public class Algorithm {
 				computeInfluence(node);
 			}
 			return null;
+		}
+
+		private void computeInfluence(Node node) {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 
