@@ -1,6 +1,7 @@
 package com.cs255.im.tdg.algorithm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -93,7 +94,7 @@ public class Algorithm {
 	void computeInfluence(Node v, Set<Long> R) {
 
 		Queue<Node> Q = new LinkedList<Node>();
-		Set<Node> L = new HashSet<Node>(); // Path list
+		Set<Long> L = new HashSet<Long>(); // Path list
 		int l = 0; // level
 
 		/*
@@ -101,38 +102,51 @@ public class Algorithm {
 		 * including, level d1.
 		 */
 		float Infv = 0;
-		L.add(v); // add in path
+		L.add(v.getNodeID()); // add in path
 		Q.add(v); // Q.enqueue(v);
 
-		List<Float> tempThrsholds = new ArrayList<Float>();
-		tempThrsholds.add(v.getThreshold()); // Store θ values into θtemp
-
-		float tempThrshold = v.getThreshold();
+		HashMap<Long,Float> tempThresholds = new HashMap<Long,Float>();
 
 		while (!Q.isEmpty()) {
 			Node u = Q.poll();
 
-			for (Map.Entry<Long, Float> outwardsNode : u.getOutAdjMap().entrySet()) {
-				if (R.contains(outwardsNode.getKey()) || L.contains(outwardsNode.getKey()))
+			for (Map.Entry<Long, Float> outwardNode : u.getOutAdjMap().entrySet())
+			{
+				float w_weight=outwardNode.getValue();
+				long  w_id=outwardNode.getKey();
+				
+				if (R.contains(w_id) || L.contains(w_id) ) 
 					continue;
+				
+				Node w_node = graph.getNodes().get(w_id);
 
-				Node w = graph.getNodes().get(outwardsNode.getKey());
-
-				if (outwardsNode.getValue() > w.getThreshold()) // p(u,w) ≥ θw
+				if(!tempThresholds.containsKey(w_id))
+					tempThresholds.put(w_id,w_node.getThreshold());
+								
+				Float w_threshold= tempThresholds.get(w_id);
+				
+				if (w_weight > w_threshold) // weight ≥ θw
 				{
 					Infv = Infv + 1;
 					if (l <= d1)
-						Q.add(w);
-					L.add(w);
-				} else {
-					Infv += outwardsNode.getValue() / w.getThreshold(); // Temporarily update θw
-					w.setThreshold(w.getThreshold() - outwardsNode.getValue()); // θw = θw - p(u,w)
+						Q.add(w_node);
+					L.add(w_id);
+				}
+				else
+				{
+					Infv += w_weight/w_threshold;
+					w_threshold -=w_weight;
+					tempThresholds.replace(w_id, w_threshold);
 				}
 			}
-			l++; // Check and update l
+			if (l + 1 <= d1)	
+			     l++; // Check and update l
+			else
+				l++;
 		}
 
-		v.setThreshold(tempThrshold); // Restore back θ values from θtemp .
+		// Restore back θ values from θtemp .
+		//not required as using tempThresholds. So, original threshold are intact;
 	}
 
 	void computeInitialInfluence() {
