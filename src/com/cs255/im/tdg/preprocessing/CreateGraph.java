@@ -15,7 +15,7 @@ import com.cs255.im.tdg.graph.Node;
 public class CreateGraph {
 
 	static Graph directedGraph;
-	static String file = "/Users/charulatalodha/MyFolder/Spring2020/DAA/Project-InfluenceMax/twitterdata/f1/12831.edges";
+	static String file = "C:\\Users\\tirum\\Documents\\Priyatham\\SJSU\\courses\\Sprint2020\\CS255\\project\\datasets\\twitter.tar\\twitter\\twitter\\12831.edges";
 
 	public static void main(String[] args) throws IOException {
 		// create an instance of Graph
