@@ -15,16 +15,23 @@ import com.cs255.im.tdg.graph.Node;
 public class CreateGraph {
 
 	static Graph directedGraph;
-	static String file = "C:\\Users\\tirum\\Documents\\Priyatham\\SJSU\\courses\\Sprint2020\\CS255\\project\\datasets\\twitter.tar\\twitter\\twitter\\12831.edges";
-
+	static String edgefile = "C:\\Users\\tirum\\Documents\\Priyatham\\SJSU\\courses\\Sprint2020\\CS255\\project\\datasets\\twitter.tar\\twitter\\twitter\\12831.edges";
+	static String directory= "/Users/charulatalodha/MyFolder/Spring2020/DAA/Project-InfluenceMax/twitterdata";
 	public static void main(String[] args) throws IOException {
 		// create an instance of Graph
 		directedGraph = new Graph();
+		
+		File folder = new File(directory);
+		File[] listOfFiles = folder.listFiles();
+
+		for (File file : listOfFiles) {
+		    if (file.isFile() && file.getName().contains(".edges")) {
+		 
 
 		try {
 
-			File myObj = new File(file);
-			Scanner myReader = new Scanner(myObj);
+//			File myObj = new File(file);
+			Scanner myReader = new Scanner(file);
 
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
@@ -52,23 +59,28 @@ public class CreateGraph {
 			} // while ends
 			
 			myReader.close();
-			
-			//record vertices count of Graph
-			directedGraph.setNumOfVertices(directedGraph.getNodes().size());
-			
-			//set in and out degrees
-			directedGraph.setInOutDegrees();
-			//printGraph
-			directedGraph.printGraph();
-			//save graph in a file
-			Util.saveGraph(directedGraph, "twittergraph.ser");
-		
-			
-			
+				
 		} catch (FileNotFoundException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
+		
+	    System.out.println(file.getName());
+		    }
+		    }
+		
+		//record vertices count of Graph
+		directedGraph.setNumOfVertices(directedGraph.getNodes().size());
+		
+		//set in and out degrees
+		directedGraph.setInOutDegrees();
+		//printGraph
+//		directedGraph.printGraph();
+		//save graph in a file
+		Util.saveGraph(directedGraph, "twittergraph.ser");
+	
+		
+	
 
 	}
 
