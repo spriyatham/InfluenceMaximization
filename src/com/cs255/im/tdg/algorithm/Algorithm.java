@@ -3,6 +3,7 @@ package com.cs255.im.tdg.algorithm;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,8 @@ public class Algorithm {
 	int d1, d2, d3;
 	float threshold;
 	PriorityQueue pq;
-
+	Set<Long> seedSet;
+	Set<Long> infectedSet;
 	/**
 	 * TODO : Ask for Priority on Influence
 	 */
@@ -40,6 +42,28 @@ public class Algorithm {
 		weightThresholdInit();
 
 	}
+
+	
+	public Set<Long> getSeedSet() {
+		return seedSet;
+	}
+
+
+	public void setSeedSet(Set<Long> seedSet) {
+		this.seedSet = seedSet;
+	}
+
+	
+	
+	public Set<Long> getInfectedSet() {
+		return infectedSet;
+	}
+
+
+	public void setInfectedSet(Set<Long> infectedSet) {
+		this.infectedSet = infectedSet;
+	}
+
 
 	/**
 	 * @param graph
@@ -70,8 +94,8 @@ public class Algorithm {
 		}
 	}
 
-	void InfluenceMaximization(int nmax) {
-		Set<Long> S = new HashSet<Long>();
+	public void InfluenceMaximization(int nmax) {
+		Set<Long> S = new LinkedHashSet<Long>(); //Changing from HashSet to LinkedHashSet to preserve order
 		Set<Long> R = new HashSet<Long>();
 
 		// Compute initial influence for each node.
@@ -99,11 +123,13 @@ public class Algorithm {
 		}
 
 		System.out.println("Seed Set of Size " + nmax + " :" + S);
-		printSeedSet(S);
+		//printSeedSet(S);
+		setSeedSet(S);
+		setInfectedSet(R);
 
 	}
 
-	void printSeedSet(Set<Long> seedSet) {
+	public void printSeedSet(Set<Long> seedSet) {
 		Map<Long, Node> nodes = graph.getNodes();
 		
 		for (Long nodeId : seedSet) {

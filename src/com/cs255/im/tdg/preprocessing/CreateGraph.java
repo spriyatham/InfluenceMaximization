@@ -16,7 +16,7 @@ public class CreateGraph {
 
 	static Graph directedGraph;
 	static String edgefile = "C:\\Users\\tirum\\Documents\\Priyatham\\SJSU\\courses\\Sprint2020\\CS255\\project\\datasets\\twitter.tar\\twitter\\twitter\\12831.edges";
-	static String directory= "/Users/charulatalodha/MyFolder/Spring2020/DAA/Project-InfluenceMax/twitterdata";
+	static String directory= "C:\\Users\\tirum\\Documents\\Priyatham\\SJSU\\courses\\Sprint2020\\CS255\\project\\datasets\\twitter.tar\\twitter\\twitter";
 	public static void main(String[] args) throws IOException {
 		// create an instance of Graph
 		directedGraph = new Graph();
