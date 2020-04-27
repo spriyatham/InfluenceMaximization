@@ -42,7 +42,7 @@ public class TDGExperiments {
 		for(int t =0; t < 3; t++)
 		{ 
 		threshold=thresholdsarr[t];
-		Tracer tracer = new Tracer(logFile, d1, d2, d3, threshold);
+		Tracer tracer = new Tracer(logFile, d1, d2, d3, threshold,seedSizes[0]);
 		Graph graph = Util.loadGraph(graphFilePath);
 		Algorithm algorithm = new Algorithm(graph, d1, d2, d3, threshold);
 		
@@ -64,7 +64,7 @@ public class TDGExperiments {
 		tracer.trace("Infected set size : " + algorithm.getInfectedSet().size()+"\n\n");
 		
 		for(int j =1; j < seedSizes.length; j++)
-		{
+		{   tracer = new Tracer(logFile, d1, d2, d3, threshold,seedSizes[j]);
 			tracer.trace("SeedSize = " + seedSizes[j]);
 			tracer.trace("Threshold = " + threshold);
 			tracer.trace("Total Nodes: " + graph.getNumOfVertices());
