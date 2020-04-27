@@ -36,27 +36,52 @@ public class TDGExperiments {
 			seedSizes[i++] = Integer.parseInt(seedSize);
 		}
 		logFile = args[6];
-		for(int j =0; j < seedSizes.length; j++)
+		
+		float[] thresholdsarr= {0.3f,0.5f,0.8f};
+		
+		for(int t =0; t < 3; t++)
+		{ 
+		threshold=thresholdsarr[t];
+		Tracer tracer = new Tracer(logFile, d1, d2, d3, threshold);
+		Graph graph = Util.loadGraph(graphFilePath);
+		Algorithm algorithm = new Algorithm(graph, d1, d2, d3, threshold);
+		
+		//first initialization
+		tracer.trace("SeedSize = " + seedSizes[0]);
+		tracer.trace("Threshold = " + threshold);
+		tracer.trace("Total Nodes: " + graph.getNumOfVertices());
+		tracer.trace("Total Edges: " + graph.getNumOfEdges());
+		
+		long influenceStartTime = System.currentTimeMillis();
+		algorithm.InfluenceMaximization(seedSizes[0]);
+		long influenceEndTime = System.currentTimeMillis();
+		long duration = (influenceEndTime - influenceStartTime); // Total execution time in milli seconds
+
+		tracer.trace("\n\nInfluence calculated in : " + duration + "ms");
+		//Print Seed Set...
+		printSeedSet(algorithm.getSeedSet(), graph, tracer);
+		//InfectedNode size..
+		tracer.trace("Infected set size : " + algorithm.getInfectedSet().size()+"\n\n");
+		
+		for(int j =1; j < seedSizes.length; j++)
 		{
-			Tracer tracer = new Tracer(logFile, d1, d2, d3, threshold);
-			Graph graph = Util.loadGraph(graphFilePath);
 			tracer.trace("SeedSize = " + seedSizes[j]);
+			tracer.trace("Threshold = " + threshold);
 			tracer.trace("Total Nodes: " + graph.getNumOfVertices());
-			System.out.println("Total Edges: " + graph.getNumOfEdges());
+			tracer.trace("Total Edges: " + graph.getNumOfEdges());
 			
-			Algorithm algorithm = new Algorithm(graph, d1, d2, d3, threshold);
-			long influenceStartTime = System.currentTimeMillis();
-			algorithm.InfluenceMaximization(seedSizes[j]);
-			long influenceEndTime = System.currentTimeMillis();
-			long duration = (influenceEndTime - influenceStartTime); // Total execution time in milli seconds
+			//poll more seeds
+			 algorithm.InfluenceMaximizationIncreseSeed(seedSizes[j]-seedSizes[j-1] + 1,seedSizes[j]);
+			 influenceEndTime = System.currentTimeMillis();
+			 duration = (influenceEndTime - influenceStartTime); // Total execution time in milli seconds
 
 			tracer.trace("\n\nInfluence calculated in : " + duration + "ms");
 			//Print Seed Set...
 			printSeedSet(algorithm.getSeedSet(), graph, tracer);
 			//InfectedNode size..
-			tracer.trace("Infected set size : " + algorithm.getInfectedSet().size());
+			tracer.trace("Infected set size : " + algorithm.getInfectedSet().size()+"\n\n");
 		}
-		
+		}
 		
 	}
 	

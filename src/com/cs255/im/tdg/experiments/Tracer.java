@@ -16,7 +16,7 @@ public class Tracer {
 	public Tracer(String filePath, int d1, int d2, int d3, float threshold) throws IOException
 	{
 		Date d = new Date();
-		String fileName = filePath+"\\output_"+d1 + "_" + d2+ "_" + d3 + "_" +threshold+"_"+ Calendar.getInstance().getTimeInMillis();
+		String fileName = filePath+"/output_"+d1 + "_" + d2+ "_" + d3 + "_" +threshold+"_"+ Calendar.getInstance().getTimeInMillis()+".txt";
 		f = new File(fileName);
 		fw = new FileWriter(f);
 		bw = new BufferedWriter(fw);

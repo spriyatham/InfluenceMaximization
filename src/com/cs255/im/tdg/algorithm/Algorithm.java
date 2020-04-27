@@ -114,7 +114,9 @@ public class Algorithm {
 
 			if (R.contains(seed.getNodeID()))
 				continue;
-
+			
+			System.out.println("Added new Seed "+i+" : "+seed.getNodeID());
+			
 			S.add(seed.getNodeID());
 			R.add(seed.getNodeID());
 			// UpdateForNewSeed(s,R,vθ,W,d1,d2,G, Inf)
@@ -128,6 +130,41 @@ public class Algorithm {
 		setInfectedSet(R);
 
 	}
+	
+	public void InfluenceMaximizationIncreseSeed(int start, int nmax) {
+		Set<Long> S = new LinkedHashSet<Long>(); //Changing from HashSet to LinkedHashSet to preserve order
+		
+		Set<Long> R = new HashSet<Long>();
+
+		S.addAll(seedSet);
+		R.addAll(infectedSet);
+		System.out.println("Compute Influence for incresed seed size");
+		System.out.println("Beginning the influence process...");
+
+		int i = start;
+		while (i <= nmax) {
+			// select a node with max influence
+			Node seed = pq.poll();// 0;// Select s = argmax v ∈ V\R {Infv} //TODO:maxheap
+
+			if (R.contains(seed.getNodeID()))
+				continue;
+			
+			System.out.println("Added new Seed "+i+" : "+seed.getNodeID());
+			
+			S.add(seed.getNodeID());
+			R.add(seed.getNodeID());
+			// UpdateForNewSeed(s,R,vθ,W,d1,d2,G, Inf)
+			updateForNewSeed(seed, R, d1, d2, graph);
+			i++;
+		}
+
+		System.out.println("Seed Set of Size " + nmax + " :" + S);
+		//printSeedSet(S);
+		setSeedSet(S);
+		setInfectedSet(R);
+
+	}
+	
 
 	public void printSeedSet(Set<Long> seedSet) {
 		Map<Long, Node> nodes = graph.getNodes();
@@ -374,8 +411,9 @@ public class Algorithm {
 
 		long startTime = System.currentTimeMillis();
 
-		Graph directedGraph = Util.loadGraph("twittergraph.ser");
-
+//		Graph directedGraph = Util.loadGraph("twittergraph.ser");
+		Graph directedGraph = Util.loadGraph("facebookgraph.ser");
+		
 		System.out.println("Total Nodes: " + directedGraph.getNumOfVertices());
 		System.out.println("Total Edges: " + directedGraph.getNumOfEdges());
 
@@ -393,8 +431,10 @@ public class Algorithm {
 		long influenceStartTime = System.currentTimeMillis();
 
 		TDG.InfluenceMaximization(nmax);
+		TDG.InfluenceMaximizationIncreseSeed(20-nmax+1,20);
+		
 		// printGraph
-		// directedGraph.printGraph();
+		 directedGraph.printGraph();
 
 		long influenceEndTime = System.currentTimeMillis();
 

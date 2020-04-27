@@ -16,29 +16,31 @@ public class CreateGraph {
 
 	static Graph directedGraph;
 	static String edgefile = "C:\\Users\\tirum\\Documents\\Priyatham\\SJSU\\courses\\Sprint2020\\CS255\\project\\datasets\\twitter.tar\\twitter\\twitter\\12831.edges";
-	static String directory= "C:\\Users\\tirum\\Documents\\Priyatham\\SJSU\\courses\\Sprint2020\\CS255\\project\\datasets\\twitter.tar\\twitter\\twitter";
+	static String directory= "/Users/charulatalodha/git/InfluenceMaximization/facebook-links.txt";
 	public static void main(String[] args) throws IOException {
 		// create an instance of Graph
 		directedGraph = new Graph();
 		
-		File folder = new File(directory);
-		File[] listOfFiles = folder.listFiles();
+//		File folder = new File(directory);
+//		File[] listOfFiles = folder.listFiles();
 
-		for (File file : listOfFiles) {
-		    if (file.isFile() && file.getName().contains(".edges")) {
-		 
+//		for (File file : listOfFiles) {
+//		    if (file.isFile() && file.getName().contains(".edges")) {
+//		 
+		File file = new File(directory);
 
 		try {
 
-//			File myObj = new File(file);
+			
 			Scanner myReader = new Scanner(file);
 
 			while (myReader.hasNextLine()) {
 				String data = myReader.nextLine();
-				String edge[] = data.split(" ");
-				if (edge.length == 2) {
+				String edge[] = data.split("\\s+");
+				
+				if (edge.length == 3) {
 					directedGraph.increseNumOfEdges();
-//					System.out.println(" Edge:" + data);
+					System.out.println(" Edge:" + data);
 					// create a node vertex
 					Node vertex1 = createNode(edge[0]);
 					Node vertex2 = createNode(edge[1]);
@@ -66,8 +68,8 @@ public class CreateGraph {
 		}
 		
 	    System.out.println(file.getName());
-		    }
-		    }
+//		    }
+//		    }
 		
 		//record vertices count of Graph
 		directedGraph.setNumOfVertices(directedGraph.getNodes().size());
@@ -75,9 +77,9 @@ public class CreateGraph {
 		//set in and out degrees
 		directedGraph.setInOutDegrees();
 		//printGraph
-//		directedGraph.printGraph();
+		directedGraph.printGraph();
 		//save graph in a file
-		Util.saveGraph(directedGraph, "twittergraph.ser");
+		Util.saveGraph(directedGraph, "facebookgraph.ser");
 	
 		
 	
