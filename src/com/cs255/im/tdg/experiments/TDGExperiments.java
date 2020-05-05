@@ -37,11 +37,7 @@ public class TDGExperiments {
 		}
 		logFile = args[6];
 		
-		float[] thresholdsarr= {0.3f,0.5f,0.8f};
-		
-		for(int t =0; t < 3; t++)
-		{ 
-		threshold=thresholdsarr[t];
+		 
 		Tracer tracer = new Tracer(logFile, d1, d2, d3, threshold,seedSizes[0]);
 		Graph graph = Util.loadGraph(graphFilePath);
 		Algorithm algorithm = new Algorithm(graph, d1, d2, d3, threshold);
@@ -63,6 +59,7 @@ public class TDGExperiments {
 		//InfectedNode size..
 		tracer.trace("Infected set size : " + algorithm.getInfectedSet().size()+"\n\n");
 		
+		//do incremental calculation for each seed size
 		for(int j =1; j < seedSizes.length; j++)
 		{   tracer = new Tracer(logFile, d1, d2, d3, threshold,seedSizes[j]);
 			tracer.trace("SeedSize = " + seedSizes[j]);
@@ -71,7 +68,7 @@ public class TDGExperiments {
 			tracer.trace("Total Edges: " + graph.getNumOfEdges());
 			
 			//poll more seeds
-			 algorithm.InfluenceMaximizationIncreseSeed(seedSizes[j]-seedSizes[j-1] + 1,seedSizes[j]);
+			 algorithm.InfluenceMaximizationIncreseSeed(seedSizes[j-1] + 1,seedSizes[j]);
 			 influenceEndTime = System.currentTimeMillis();
 			 duration = (influenceEndTime - influenceStartTime); // Total execution time in milli seconds
 
@@ -81,7 +78,7 @@ public class TDGExperiments {
 			//InfectedNode size..
 			tracer.trace("Infected set size : " + algorithm.getInfectedSet().size()+"\n\n");
 		}
-		}
+		
 		
 	}
 	
