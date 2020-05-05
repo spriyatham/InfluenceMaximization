@@ -21,8 +21,8 @@
    
    2. **Algorithm**: We have created an efficienet implementation of Threshold Difference Greedy Algorithm, mentioned in the above paper. 
    
-   *Highlists* : 
-   #1.Use of Priority Queue
+   *Highlights* : 
+   1. Use of Priority Queue:
    We have reduced the time complexity for selecting the new seed with maximum influence at each step by using Priority Queue. So, this resulted in improvement of Time Complexity from O(n) to O(log(n)) for that step.
-   #2. Serialization
-   #3. Incremental model for Experiments to calculate spread size.
+   2. Serialization
+   3. Incremental model for Experiments to calculate spread size.
