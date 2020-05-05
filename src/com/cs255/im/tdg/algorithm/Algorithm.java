@@ -390,12 +390,9 @@ public class Algorithm {
 	/**
 	 *  **NOTE: Expeimental code**
 	 * The set of nodes in the graph are divided into 10 subsets.
-	 * Influence of each subset of nodes is computed by one thread.
-	 * We tried this out in one of our experiments.
-	 * Note: The results of this experiement, were not added to the report.
-	 * 
+	 * Influence of each subset of nodes is computed by one thread. 
 	 * */
-	void computeInitialInfluence() {
+	void computeInitialInfluence(Algorithm algorithm) {
 		int s = 10; // s splits
 		Map<Long, Node> nodes = this.graph.getNodes();
 
@@ -408,7 +405,7 @@ public class Algorithm {
 		while (start < numOfVertices) {
 			int end = (start + s) > numOfVertices ? numOfVertices : start + s;
 			List<Node> subList = nodeList.subList(start, end);
-			Callable<Void> task = new InfluenceComputer(subList);
+			Callable<Void> task = new InfluenceComputer(subList,algorithm);
 			resultList.add(executor.submit(task));
 		}
 		// This sort of acts like a joint to wait for all the threads to complete
@@ -426,24 +423,23 @@ public class Algorithm {
 	/** Experimental code **/
 	class InfluenceComputer implements Callable<Void> {
 		List<Node> nodeList;
-
-		public InfluenceComputer(List<Node> nodes) {
+		Algorithm algorithm;
+		
+		public InfluenceComputer(List<Node> nodes,Algorithm algorithm) {
 			this.nodeList = nodes;
+			this.algorithm = algorithm;
 		}
 
 		@Override
 		public Void call() throws Exception {
 
 			for (Node node : this.nodeList) {
-				computeInfluence(node);
+				//we can pass an empty set because, in the initial step, infected set will be empty
+				this.algorithm.computeInfluence(node, new HashSet<Long>());
 			}
 			return null;
 		}
 
-		private void computeInfluence(Node node) {
-			///call the actual compute influence function.
-
-		}
 	}
 
 	public static void main(String[] args) {
