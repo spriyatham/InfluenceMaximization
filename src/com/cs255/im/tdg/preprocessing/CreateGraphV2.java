@@ -99,18 +99,7 @@ public class CreateGraphV2 {
 		//save graph in a file
 		Util.saveGraph(directedGraph, serFile);
 		
-		Long n1 =13577l;
-		Node n= directedGraph.getNodes().get(n1);
 		
-		System.out.println(n.getInAdjList());
-		System.out.println(n.getOutAdjMap().keySet());
-	
-		System.out.println("Cycle :");
-		
-		List<Long> l3 = new ArrayList<Long>(n.getOutAdjMap().keySet());
-		l3.retainAll(n.getInAdjList());
-		
-		System.out.println(l3);
 		
 		
 		
