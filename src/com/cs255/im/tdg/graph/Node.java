@@ -15,8 +15,7 @@ import java.util.Map;
  * This class encloses the following information about a node.
  * 1. nodeID
  * 2. outDegree
- * 3. outWard Adjacency List - Linked List of adjacent nodes. Each entry of the linked list contains <NodeID,Weight> pairs.
- *	//TODO: Look at how edge waits are represented in adjacency list representation.
+ * 3. outWard Adjacency Map
  * 4. InDegree Adjacency List - Only node IDs..
  * 
  * Values 5 and 6 will not be computed in the pre-processing step as the values are dependent on the inputs.

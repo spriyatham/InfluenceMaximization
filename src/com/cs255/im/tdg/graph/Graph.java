@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents the Graph in memory.
+ * */
 public class Graph implements Serializable{
 	
 	//Graph has a map of nodes -> each node has out & in adjacency list

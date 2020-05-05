@@ -17,6 +17,10 @@ import com.cs255.im.tdg.graph.Graph;
 import com.cs255.im.tdg.graph.Node;
 import com.cs255.im.tdg.preprocessing.Util;
 
+/**
+ * This class contains the implementation Threshold Difference Greedy Algorithm, including all its subroutines.
+ * 
+ * **/
 public class Algorithm {
 	Graph graph;
 	int d1, d2, d3;
@@ -24,9 +28,6 @@ public class Algorithm {
 	PriorityQueue pq;
 	Set<Long> seedSet;
 	Set<Long> infectedSet;
-	/**
-	 * TODO : Ask for Priority on Influence
-	 */
 
 	public Algorithm(Graph graph, float threshold) {
 
@@ -69,7 +70,7 @@ public class Algorithm {
 	 * @param graph
 	 * @param d1
 	 * @param d2
-	 * @param d3
+	 * @param d3 - ignore, we did not use d3 in our implementation.
 	 */
 	public Algorithm(Graph graph, int d1, int d2, int d3, float threshold) {
 		super();
@@ -82,6 +83,11 @@ public class Algorithm {
 		weightThresholdInit();
 	}
 
+	/**
+	 * Assigns a fixed threshold value to each vertex in the graph.
+	 * Weights are assigned to all the edges using the following scheme.
+	 *  Weight of edge (v,u) = 1 / InDegree(u);
+	 * */
 	void weightThresholdInit() {
 		Map<Long, Node> nodeMap = this.graph.getNodes();
 		for (Node node : nodeMap.values()) { // set threshold
@@ -94,6 +100,10 @@ public class Algorithm {
 		}
 	}
 
+	/**
+	 * This function represents the TDG algorithm.
+	 * Computes the spread size and seed set.
+	 * */
 	public void InfluenceMaximization(int nmax) {
 		Set<Long> S = new LinkedHashSet<Long>(); //Changing from HashSet to LinkedHashSet to preserve order
 		Set<Long> R = new HashSet<Long>();
@@ -131,6 +141,11 @@ public class Algorithm {
 
 	}
 	
+	/**
+	 * This function is used for running the experiments for various seed sizes like 100,200,300,400.
+	 * Instead of re-executing the algorithm for each seed size, we re-use the results.
+	 * For example, results of 100 seed size can be reused while computing for 200 seeds.
+	 * */
 	public void InfluenceMaximizationIncreseSeed(int start, int nmax) {
 		Set<Long> S = new LinkedHashSet<Long>(); //Changing from HashSet to LinkedHashSet to preserve order
 		
@@ -177,6 +192,15 @@ public class Algorithm {
 		}
 	}
 
+	/**
+	 * Computes the influence exerted by node v on its neighborhood up through, and
+	 * including, level d1.
+	 * The Node's influence field will be updated with new value
+	 * BFS is used to traverse the graph, until d1 levels
+	 * @param v is current Node whose influence is being computed.
+	 * @param R is the infected node set.
+	 * 
+	 */
 	void computeInfluence(Node v, Set<Long> R) {
 
 		Queue<Node> Q = new LinkedList<Node>();
@@ -248,7 +272,11 @@ public class Algorithm {
 	}
 
 	/**
-	 * S, R, ThetaV, Weights,d1, d2, G, Inf vector
+	 * S - new Seed, R - Infected NodeSet,
+	 * This function accepts a new seed Node s, infected nodes set and Graph object.
+	 * It spreads the influence of Node s on its neighborhood by recursively performing BFS starting from s and goes 
+	 * until d2 level.
+	 * 
 	 */
 	void updateForNewSeed(Node s, Set<Long> infectedSet, int d1, int d2, Graph graph) {
 		Map<Long, Node> nodes = graph.getNodes();
@@ -271,6 +299,7 @@ public class Algorithm {
 					float weight = outNodeEntry.getValue();
 					Node outNode = nodes.get(outNodeId);
 					float outNodeThreshold = outNode.getThreshold();
+					// completely influence a node.
 					if (weight >= outNodeThreshold) {
 						// add the node to infected set
 						infectedSet.add(outNodeId);
@@ -303,7 +332,11 @@ public class Algorithm {
 
 	}
 
-	// Node, R, Theta, W, d1, G, Inf
+	/**
+	 * This method computes the potential influence of nodes incident to a partially influenced node.
+	 * The idea is, since the node's threshold has been reduced, may be now, one of its incident nodes might 
+	 * influence it.
+	 * */
 	void updateIncomingNeighborInfuence(Graph graph, Node v, Set<Long> infectedSet, int d1) {
 		Queue<Long> queue = new LinkedList<Long>(); // main queue used to track the bfs progress.
 		Queue<Long> newQueue = new LinkedList<Long>(); // auxillary queue used to track levels of the bfs
@@ -325,9 +358,6 @@ public class Algorithm {
 				if (!infectedSet.contains(inId) && !path.contains(inId)) {
 					Node inNode = nodes.get(inId);
 					computeInfluence(inNode, infectedSet);
-					// TODO: I still need to get more clarity on this, I should understand why we
-					// are
-					// going to the next level.
 					// if the edge(u,w) exists and weight of (u,w) > theta(w) then add w to the
 					// queue.
 					if ((outAdjMap.containsKey(inId) && (outAdjMap.get(inId) > inNode.getThreshold())) && level <= d1) {
@@ -357,6 +387,14 @@ public class Algorithm {
 	 * }
 	 **/
 
+	/**
+	 *  **NOTE: Expeimental code**
+	 * The set of nodes in the graph are divided into 10 subsets.
+	 * Influence of each subset of nodes is computed by one thread.
+	 * We tried this out in one of our experiments.
+	 * Note: The results of this experiement, were not added to the report.
+	 * 
+	 * */
 	void computeInitialInfluence() {
 		int s = 10; // s splits
 		Map<Long, Node> nodes = this.graph.getNodes();
@@ -385,6 +423,7 @@ public class Algorithm {
 
 	}
 
+	/** Experimental code **/
 	class InfluenceComputer implements Callable<Void> {
 		List<Node> nodeList;
 
@@ -402,7 +441,7 @@ public class Algorithm {
 		}
 
 		private void computeInfluence(Node node) {
-			// TODO Auto-generated method stub
+			///call the actual compute influence function.
 
 		}
 	}

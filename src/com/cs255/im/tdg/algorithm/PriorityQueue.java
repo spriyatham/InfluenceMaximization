@@ -164,6 +164,9 @@ class PriorityQueue
 		}
 	}
 	
+	/*
+	 * This function increases or decreases the priority(Influence) of node and heapifies the Priority Queue again.
+	 * */
 	void changeInfluence(Node node, float newVal)
 	{
 		long nodeId = node.getNodeID();

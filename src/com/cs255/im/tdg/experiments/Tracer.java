@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
+/*
+ * A custom tracer to write intermediate outputs to a file while performing experiments.
+ * */
 public class Tracer {
 	File f;
 	FileWriter fw;

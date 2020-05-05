@@ -12,6 +12,11 @@ import com.cs255.im.tdg.graph.Node;
  * @author Charulata Lodha
  *
  */
+/**
+ * This class contains logic to read graphs represented in format like .edges and links.txt and 
+ * Create the Graph object containing a map of Nodes.
+ * The graph object is serialized and saved as a file.
+ * */
 public class CreateGraph {
 
 	static Graph directedGraph;
@@ -20,18 +25,11 @@ public class CreateGraph {
 	public static void main(String[] args) throws IOException {
 		// create an instance of Graph
 		directedGraph = new Graph();
-		
-//		File folder = new File(directory);
-//		File[] listOfFiles = folder.listFiles();
 
-//		for (File file : listOfFiles) {
-//		    if (file.isFile() && file.getName().contains(".edges")) {
-//		 
 		File file = new File(directory);
 
 		try {
 
-			
 			Scanner myReader = new Scanner(file);
 
 			while (myReader.hasNextLine()) {

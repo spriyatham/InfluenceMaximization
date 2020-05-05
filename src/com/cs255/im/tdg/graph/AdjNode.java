@@ -8,6 +8,9 @@ import java.io.Serializable;
  */
 /**
  * Represents an element of the Outward Adjacency list.
+ * Note: We decided, use a a Map instead of AdjNode, to store outward adjacency nodes and their weights. as it 
+ * facilitates constant time lookup.
+ * 
  * */
 public class AdjNode implements Serializable{
 	long nodeID;

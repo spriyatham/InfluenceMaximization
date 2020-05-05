@@ -15,6 +15,9 @@ import com.cs255.im.tdg.graph.Node;
 
 public class Util {
 
+	/**
+	 * Serialize the Graph.
+	 * */
 	public static void saveGraph(Graph graph, String file) throws IOException
 	{
 		ObjectOutputStream out = null;
@@ -34,6 +37,9 @@ public class Util {
 		System.out.println("saveGraph: graph successfully saved.");
 	}
 	
+	/**
+	 * Deserialize and return a Graph object. 
+	 * */
 	public static Graph loadGraph(String file)
 	{   
 		ObjectInputStream in = null;
@@ -51,7 +57,7 @@ public class Util {
 	}
 	
 	/**
-	 * Weights of an edge is calculated as a proportion of InDegree of the target
+	 * Another version of EdgeWeight Computation
 	 * 
 	 * */
 	public static void computeEdgeWeight(Graph graph)
