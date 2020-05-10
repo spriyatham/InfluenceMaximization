@@ -55,7 +55,7 @@ public class CreateGraphV2 {
 				String data = myReader.nextLine();
 				String edge[] = data.split("\\s+");
 				
-				if (edge.length == 3) {
+				if (edge.length == 2) {
 					directedGraph.increseNumOfEdges();
 //					System.out.println(" Edge:" + data);
 					// create a node vertex
