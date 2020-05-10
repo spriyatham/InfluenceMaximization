@@ -26,3 +26,9 @@
    We have reduced the time complexity for selecting the new seed with maximum influence at each step by using Priority Queue. So, this resulted in improvement of Time Complexity from O(n) to O(log(n)) for that step.
    2. Serialization
    3. Incremental model for Experiments to calculate spread size.
+   
+   #Jar Files :
+   Sample commands
+   java -jar CreateGraph.jar "/twitterdata" "twi.ser"
+   java -jar ComputeInfluence.jar twi.ser 2 2 3 0.8 "100,200,300,400" result
+
