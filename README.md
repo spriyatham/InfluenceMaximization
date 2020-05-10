@@ -30,7 +30,9 @@
   
  # Jar Files:
   
-   Sample commands
-   java -jar CreateGraph.jar "/twitterdata" "twi.ser"
-   java -jar ComputeInfluence.jar twi.ser 2 2 3 0.8 "100,200,300,400" result
+   Sample commands :
+   
+   $ java -jar CreateGraph.jar "/twitterdata" "twi.ser"
+   
+   $ java -jar ComputeInfluence.jar twi.ser 2 2 3 0.8 "100,200,300,400" result
 
