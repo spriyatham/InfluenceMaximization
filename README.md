@@ -1,4 +1,6 @@
 # InfluenceMaximization
+ Objective : Find the top influencers for a given social media platform.
+ 
  SJSU : CS-255 Project on "Deterministice Threshold based Influence Maximization Algorithm"
  
  # Team Members:
@@ -25,7 +27,7 @@
   # Highlights :
    1. Use of Priority Queue:
    We have reduced the time complexity for selecting the new seed with maximum influence at each step by using Priority Queue. So, this resulted in improvement of Time Complexity from O(n) to O(log(n)) for that step.
-   2. Serialization
+   2. Serialization to save the graph and then load it as an input to the main algorithm.
    3. Incremental model for Experiments to calculate spread size.
    
   
