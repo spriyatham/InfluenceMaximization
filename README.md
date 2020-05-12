@@ -1,7 +1,7 @@
 # InfluenceMaximization
  Objective : Find the top influencers for a given social media platform.
  
- SJSU : CS-255 Project on "Deterministice Threshold based Influence Maximization Algorithm"
+ SJSU : CS-255 Project on "Deterministic Threshold based Influence Maximization Algorithm"
  
  ** Final Code in : "submission" branch. 
 
