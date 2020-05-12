@@ -1,6 +1,8 @@
 # InfluenceMaximization
+ Objective : Find the top influencers for a given social media platform.
+ 
  SJSU : CS-255 Project on "Deterministice Threshold based Influence Maximization Algorithm"
- Objective : Find the top influencers for a given social media platform using Threshold Difference Greedy Algorithm.
+
  
  # Team Members:
    1.Sriarm Priyatham Siram <br />
